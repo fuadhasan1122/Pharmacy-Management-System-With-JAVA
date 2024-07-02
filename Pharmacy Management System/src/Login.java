@@ -103,13 +103,13 @@ public class Login extends javax.swing.JFrame {
         try{
            Connection con = ConnectionProvider.getCon();
            Statement st = con.createStatement();
-          ResultSet rs = st.executeQuery("SELECT * FROM appuser WHERE username='" + username + "' AND password='" + password + "'");
+           ResultSet rs = st.executeQuery("SELECT * FROM appuser WHERE username='" + username + "' AND password='" + password + "'");
 
            while(rs.next()){
              temp=1;
              if(rs.getString("userRole").equals("Admin")){
                 setVisible(false);
-                new AdminDashborad(username).setVisible(true);
+                new AdminDashborad().setVisible(true);
              }
              else{
                  setVisible(false);
