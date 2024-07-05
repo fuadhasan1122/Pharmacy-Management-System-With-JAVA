@@ -113,7 +113,7 @@ public class Login extends javax.swing.JFrame {
              }
              else{
                  setVisible(false);
-                 new Pharmacist().setVisible(true);
+                 new Pharmacist(username).setVisible(true);
              }
              
            }
