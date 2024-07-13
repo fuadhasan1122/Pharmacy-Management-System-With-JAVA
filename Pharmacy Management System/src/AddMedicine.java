@@ -15,15 +15,18 @@ import java.sql.*;
 public class AddMedicine extends javax.swing.JFrame {
     public String numberpattern = "^[0-9]*$";
     
-    
+
+
 
     /**
      * Creates new form AddMedicine
      */
     public AddMedicine() {
         initComponents();
+        
         setLocationRelativeTo(null);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,6 +37,7 @@ public class AddMedicine extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -41,15 +45,16 @@ public class AddMedicine extends javax.swing.JFrame {
         comboType = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtCompanyName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtPricePerUnit = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        comboCompany = new javax.swing.JComboBox<>();
+        txtName = new javax.swing.JTextField();
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/all_pages_background.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -65,14 +70,14 @@ public class AddMedicine extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 6, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Medicine ID");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 92, -1, -1));
 
         txtUniqueId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtUniqueId, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 124, 260, -1));
+        getContentPane().add(txtUniqueId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 260, -1));
 
         comboType.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Liquid", "Tablet", "Capsules", "Topical medicines", "Suppositories", "Drops", "Inhalers", "Injections" }));
@@ -91,20 +96,9 @@ public class AddMedicine extends javax.swing.JFrame {
         jLabel4.setText("Name");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 248, -1, -1));
 
-        txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 274, 260, -1));
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Company Name");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 324, -1, -1));
-
-        txtCompanyName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtCompanyName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCompanyNameActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtCompanyName, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 356, 260, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Quantity");
@@ -135,8 +129,17 @@ public class AddMedicine extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 188, -1, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/all_pages_background.png"))); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        comboCompany.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Square Pharmaceuticals Ltd.", "Incepta Pharmaceutical Ltd.", "Beximco Pharmaceuticals Ltd.", "Opsonin Pharma Ltd.", "Renata Ltd.", "Healthcare Pharmaceuticals Ltd.", "ACI Pharmaceuticals Ltd.", "Eskayef Pharmaceuticals Ltd.", "ACME Laboratories Ltd.", "Aristopharma Ltd." }));
+        comboCompany.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCompanyActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comboCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 260, -1));
+
+        txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 260, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -144,10 +147,6 @@ public class AddMedicine extends javax.swing.JFrame {
     private void comboTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboTypeActionPerformed
-
-    private void txtCompanyNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCompanyNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCompanyNameActionPerformed
 
     private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
         // TODO add your handling code here:
@@ -158,7 +157,7 @@ public class AddMedicine extends javax.swing.JFrame {
         String uniqueId = txtUniqueId.getText();
          String typeMedicine =(String)comboType.getSelectedItem();
          String name = txtName.getText();
-         String companyName = txtCompanyName.getText();
+         String comboCom = (String)comboCompany.getSelectedItem();
          String quantity = txtQuantity.getText();
          String price = txtPricePerUnit.getText();
          
@@ -168,7 +167,7 @@ public class AddMedicine extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Type of Medicine  field is  required.");
          }else if(name.equals("")){
              JOptionPane.showMessageDialog(null, "Name field is  required.");
-         }else if(companyName.equals("")){
+         }else if(comboCom.equals("")){
              JOptionPane.showMessageDialog(null, "Company Name field is  required.");
          }else if(quantity.equals("")){
              JOptionPane.showMessageDialog(null, "Quantity field is  required.");
@@ -187,7 +186,7 @@ public class AddMedicine extends javax.swing.JFrame {
              ps.setString(1, uniqueId);
              ps.setString(2, typeMedicine);
              ps.setString(3, name);
-             ps.setString(4,companyName );
+             ps.setString(4,comboCom );
              ps.setString(5, quantity);
              ps.setString(6, price);
              ps.executeUpdate();
@@ -205,6 +204,10 @@ public class AddMedicine extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void comboCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompanyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCompanyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,6 +245,7 @@ public class AddMedicine extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboCompany;
     private javax.swing.JComboBox<String> comboType;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -253,7 +257,6 @@ public class AddMedicine extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField txtCompanyName;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPricePerUnit;
     private javax.swing.JTextField txtQuantity;

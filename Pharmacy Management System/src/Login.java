@@ -1,3 +1,4 @@
+
 import dao.ConnectionProvider;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
@@ -8,7 +9,6 @@ import java.sql.ResultSet;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author fhnab
@@ -94,56 +94,51 @@ public class Login extends javax.swing.JFrame {
 
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
         // TODO add your handling code here:
-       
-        
+
         String username = textUsername.getText();
         String password = textPassword.getText();
-        
-        int temp =0;
-        try{
-           Connection con = ConnectionProvider.getCon();
-           Statement st = con.createStatement();
-           ResultSet rs = st.executeQuery("SELECT * FROM appuser WHERE username='" + username + "' AND password='" + password + "'");
 
-           while(rs.next()){
-             temp=1;
-             if(rs.getString("userRole").equals("Admin")){
-                setVisible(false);
-                new AdminDashborad().setVisible(true);
-             }
-             else{
-                 setVisible(false);
-                 new Pharmacist(username).setVisible(true);
-             }
-             
-           }
-           if(temp==0){
-               JOptionPane.showMessageDialog(null,"Incorrect Username or Password");
-           
-           }
-           else{
-                JOptionPane.showMessageDialog(null,"Login Sucessfully.");
-           }
+        int temp = 0;
+        try {
+            Connection con = ConnectionProvider.getCon();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM appuser WHERE username='" + username + "' AND password='" + password + "'");
 
+            while (rs.next()) {
+                temp = 1;
+                if (rs.getString("userRole").equals("Admin")) {
+                    setVisible(false);
+                    new AdminDashborad().setVisible(true);
+                } else {
+                    setVisible(false);
+                    new Pharmacist(username).setVisible(true);
+                }
+
+            }
+            if (temp == 0) {
+                JOptionPane.showMessageDialog(null, "Incorrect Username or Password");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Login Sucessfully.");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
-        
-        catch(Exception e){
-           JOptionPane.showMessageDialog(null,e);
-        }
-        
+
     }//GEN-LAST:event_login_buttonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int a = JOptionPane.showConfirmDialog(null,"Do you Want to Close Aplication?","Select",JOptionPane.YES_NO_OPTION);
-        if(a==0){
+        int a = JOptionPane.showConfirmDialog(null, "Do you Want to Close Aplication?", "Select", JOptionPane.YES_NO_OPTION);
+        if (a == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void textUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textUsernameActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_textUsernameActionPerformed
 
     /**
