@@ -174,13 +174,13 @@ public class AddUser extends javax.swing.JFrame {
         iconLabel.setText("jLabel10");
         getContentPane().add(iconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, -1, -1));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-reply-arrow-30.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
