@@ -40,8 +40,6 @@ public class AddMedicine extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        txtUniqueId = new javax.swing.JTextField();
         comboType = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -71,13 +69,6 @@ public class AddMedicine extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Medicine ID");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 92, -1, -1));
-
-        txtUniqueId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtUniqueId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 260, -1));
 
         comboType.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Liquid", "Tablet", "Capsules", "Topical medicines", "Suppositories", "Drops", "Inhalers", "Injections" }));
@@ -154,16 +145,16 @@ public class AddMedicine extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String uniqueId = txtUniqueId.getText();
-         String typeMedicine =(String)comboType.getSelectedItem();
+       // String uniqueId = txtUniqueId.getText();
+       /*  String typeMedicine =(String)comboType.getSelectedItem();
          String name = txtName.getText();
          String comboCom = (String)comboCompany.getSelectedItem();
          String quantity = txtQuantity.getText();
          String price = txtPricePerUnit.getText();
          
-         if(uniqueId.equals("")){
+        /* if(uniqueId.equals("")){
              JOptionPane.showMessageDialog(null, "Medicine ID field is  required.");
-         } else if(typeMedicine.equals("")){
+         }  if(typeMedicine.equals("")){
              JOptionPane.showMessageDialog(null, "Type of Medicine  field is  required.");
          }else if(name.equals("")){
              JOptionPane.showMessageDialog(null, "Name field is  required.");
@@ -181,14 +172,14 @@ public class AddMedicine extends javax.swing.JFrame {
          }else{
              try{
              
-             Connection con = ConnectionProvider.getCon();
+            Connection con = ConnectionProvider.getCon();
              PreparedStatement ps = con.prepareStatement("insert into medicine (uniqueId,type_of_medicines,name,companyName,quantity,price) values(?,?,?,?,?,?)");
-             ps.setString(1, uniqueId);
-             ps.setString(2, typeMedicine);
-             ps.setString(3, name);
-             ps.setString(4,comboCom );
-             ps.setString(5, quantity);
-             ps.setString(6, price);
+            // ps.setString(1, uniqueId);
+             ps.setString(1, typeMedicine);
+             ps.setString(2, name);
+             ps.setString(3,comboCom );
+             ps.setString(4, quantity);
+             ps.setString(5, price);
              ps.executeUpdate();
              JOptionPane.showMessageDialog(null, "Medicine Added Successfully.");
              setVisible(true);
@@ -199,6 +190,62 @@ public class AddMedicine extends javax.swing.JFrame {
              }
          }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+      */
+                                           
+    // TODO add your handling code here:
+    String typeMedicine = (String) comboType.getSelectedItem();
+    String name = txtName.getText();
+    String comboCom = (String) comboCompany.getSelectedItem();
+    String quantity = txtQuantity.getText();
+    String price = txtPricePerUnit.getText();
+
+    if(typeMedicine.equals("")) {
+        JOptionPane.showMessageDialog(null, "Type of Medicine field is required.");
+    } else if(name.equals("")) {
+        JOptionPane.showMessageDialog(null, "Name field is required.");
+    } else if(comboCom.equals("")) {
+        JOptionPane.showMessageDialog(null, "Company Name field is required.");
+    } else if(quantity.equals("")) {
+        JOptionPane.showMessageDialog(null, "Quantity field is required.");
+    } else if(!quantity.matches(numberpattern)) {
+        JOptionPane.showMessageDialog(null, "Quantity field is invalid.");
+    } else if(price.equals("")) {
+        JOptionPane.showMessageDialog(null, "Price per Unit field is required.");
+    } else if(!price.matches(numberpattern)) {
+        JOptionPane.showMessageDialog(null, "Price Per Unit field is invalid.");
+    } else {
+        try {
+            Connection con = ConnectionProvider.getCon();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO medicine (type_of_medicines, name, companyName, quantity, price) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, typeMedicine);
+            ps.setString(2, name);
+            ps.setString(3, comboCom);
+            ps.setString(4, quantity);
+            ps.setString(5, price);
+            ps.executeUpdate();
+            
+            // Retrieve the generated key (medicine_pk)
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int medicinePk = generatedKeys.getInt(1);
+                int uniqueId = medicinePk + 999;
+                
+                // Update the uniqueId for the inserted record
+                PreparedStatement updatePs = con.prepareStatement("UPDATE medicine SET uniqueId = ? WHERE medicine_pk = ?");
+                updatePs.setInt(1, uniqueId);
+                updatePs.setInt(2, medicinePk);
+                updatePs.executeUpdate();
+            }
+            
+            JOptionPane.showMessageDialog(null, "Medicine Added Successfully.");
+            setVisible(false);
+            new AddMedicine().setVisible(true);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+}
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -250,7 +297,6 @@ public class AddMedicine extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -260,6 +306,5 @@ public class AddMedicine extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPricePerUnit;
     private javax.swing.JTextField txtQuantity;
-    private javax.swing.JTextField txtUniqueId;
     // End of variables declaration//GEN-END:variables
 }
