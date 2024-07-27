@@ -1,6 +1,8 @@
 
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import common.OpenPdf;
 import dao.ConnectionProvider;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -473,7 +475,7 @@ public class SellMedicine extends javax.swing.JFrame {
                     try{
                         Connection con = ConnectionProvider.getCon();
                         Statement st = con.createStatement();
-                        st.executeUpdate("update medicine set quantity=quantity-"+Integer.parseInt(dtm.getValueAt(i, 4).toString()) + "where uniqueId="+Integer.parseInt(dtm.getValueAt(i, 0).toString()));
+                        st.executeUpdate("update medicine set quantity=quantity-"+Integer.parseInt(dtm.getValueAt(i, 4).toString()) + " where uniqueId="+Integer.parseInt(dtm.getValueAt(i, 0).toString()));
                         
                     }
                     catch(Exception e){
@@ -499,7 +501,7 @@ public class SellMedicine extends javax.swing.JFrame {
             }
             com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
             try{
-                PdfWriter.getInstance(doc, new FileOutputStream(PharmacyUtils.billPath+""+billId+".pdf"));
+                PdfWriter.getInstance(doc, new FileOutputStream(PharmacyUtils.billpath+""+billId+".pdf"));
                 doc.open();
                 Paragraph pharmacyName = new  Paragraph ("                                       Pharmacy Management System\n");
                 doc.add(pharmacyName);
@@ -508,18 +510,45 @@ public class SellMedicine extends javax.swing.JFrame {
                 Paragraph details = new Paragraph("\tBill ID: "+billId+"\nDate: "+new Date()+"\nTotal Paid: "+finalTotalPrice);
                 doc.add(details);
                 doc.add(starline);
-                PdfTable tbl = new PdfTable(6);
-                tbl.addCell("Medicine ID");
-                tbl.addCell("Name");
-                tbl.addCell("Company Name");
-                tbl.addCell("Price Per Unit");
-                tbl.addCell("No of units");
-                tbl.addCell("Sub Total Price");
+                PdfPTable tb1 = new PdfPTable(6);
+                tb1.addCell("Medicine ID");
+                tb1.addCell("Name");
+                tb1.addCell("Company Name");
+                tb1.addCell("Price Per Unit");
+                tb1.addCell("No of units");
+                tb1.addCell("Sub Total Price");
+                for( int i =0; i<cartTable.getRowCount();i++){
+                    String a = cartTable.getValueAt(i, 0).toString();
+                    String b = cartTable.getValueAt(i, 1).toString();
+                    String c = cartTable.getValueAt(i, 2).toString();
+                    String d = cartTable.getValueAt(i, 3).toString();
+                    String e = cartTable.getValueAt(i, 4).toString();
+                    String f = cartTable.getValueAt(i, 5).toString();
+                    tb1.addCell(a);
+                    tb1.addCell(b);
+                    tb1.addCell(c);
+                    tb1.addCell(d);
+                    tb1.addCell(e);
+                    tb1.addCell(f);
+                    
+                }
+                doc.add(tb1);
+                doc.add(starline);
+                Paragraph thanksMsg = new Paragraph ("Thank You, Please Visit Again.");
+                doc.add(thanksMsg);
+                
+                OpenPdf.openById(String.valueOf(billId));
                 
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(null, e);
             }
+            doc.close();
+            setVisible(false);
+            new SellMedicine(username).setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Please add some Medicine to Cart.");
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
