@@ -64,8 +64,8 @@ public class Login extends javax.swing.JFrame {
                 textUsernameActionPerformed(evt);
             }
         });
-        getContentPane().add(textUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 250, -1));
-        getContentPane().add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 250, -1));
+        getContentPane().add(textUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 200, -1));
+        getContentPane().add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 190, -1));
 
         login_button.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         login_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.png"))); // NOI18N
@@ -85,9 +85,11 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 0, -1, -1));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pharmacy-background-bomnaifdze6cde60.jpg"))); // NOI18N
-        jLabel6.setText("jLabel6");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-380, -370, -1, -1));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/flat-lay-medical-elements-composition-blue-cement-background.jpg"))); // NOI18N
+        jLabel6.setAlignmentX(5.0F);
+        jLabel6.setAlignmentY(5.0F);
+        jLabel6.setAutoscrolls(true);
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-530, -960, 6030, 4050));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
