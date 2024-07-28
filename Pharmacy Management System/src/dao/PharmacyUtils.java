@@ -9,6 +9,6 @@ package dao;
  * @author fhnab
  */
 public class PharmacyUtils {
-    public static String billpath = "E;\\";
+    public static String billpath = "E:\\";
     
 }

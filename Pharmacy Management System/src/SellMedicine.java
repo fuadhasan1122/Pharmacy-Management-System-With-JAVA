@@ -14,17 +14,17 @@ import java.util.Date;
 import dao.PharmacyUtils;
 import java.io.FileOutputStream;
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author fhnab
  */
 public class SellMedicine extends javax.swing.JFrame {
-
+    
     public String numberPattern = "^[0-9]*$";
     private int finalTotalPrice = 0;
     private String billId = "";
@@ -36,38 +36,38 @@ public class SellMedicine extends javax.swing.JFrame {
     public SellMedicine() {
         initComponents();
     }
-
+    
     public SellMedicine(String tempUsername) {
         initComponents();
         username = tempUsername;
         setLocationRelativeTo(null);
     }
-
+    
     private void medicineName(String nameOrUniqueId) {
         DefaultTableModel model = (DefaultTableModel) medicinesTable.getModel();
         model.setRowCount(0);
         try {
             Connection con = ConnectionProvider.getCon();
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select *from medicine where name like '" + nameOrUniqueId + "%' or uniqueId like '" + nameOrUniqueId + "%'");
+            ResultSet rs = st.executeQuery("select *from medicine where name like  '" + nameOrUniqueId + "%' or uniqueId like '" + nameOrUniqueId + "%'");
             while (rs.next()) {
-                model.addRow(new Object[]{rs.getString("uniqueId") + "- " + rs.getString("name")});
+                model.addRow(new Object[]{rs.getString("uniqueId") + "-" + rs.getString("name")});
             }
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }
-
-    private void clearMedicineFields() {
+    
+    private void clearMedicineFields(){
         txtUniqueId.setText("");
-        txtName.setText("");
-        txtCompanyName.setText("");
-        txtPricePerUnit.setText("");
-        txtNoOfUnits.setText("");
-        txtTotalPrice.setText("");
+       txtName.setText("");
+         txtCompanyName.setText("");
+          txtPricePerUnit.setText("");
+           txtNoOfUnits.setText("");
+           txtTotalPrice.setText("");
     }
-
-    public String getUniqueId(String prefix) {
+    
+    public String getUniqueId(String prefix){
         return prefix + System.nanoTime();
     }
 
@@ -100,12 +100,11 @@ public class SellMedicine extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtTotalPrice = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        cartTable = new javax.swing.JTable();
-        btnAddToCart = new javax.swing.JButton();
+        jTable2 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        lblFinalTotalPrice = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -116,14 +115,10 @@ public class SellMedicine extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Sell Medicine");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
-
-        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 68, 1490, 10));
+        jLabel1.setText("Sell Medicine ");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(526, 0, -1, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 62, 1362, 10));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -131,26 +126,18 @@ public class SellMedicine extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 20, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1336, 0, -1, -1));
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Search");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 80, -1, -1));
+        jLabel2.setText("Search ");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 72, -1, -1));
 
-        txtSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchKeyReleased(evt);
             }
         });
-        getContentPane().add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 106, 452, -1));
+        getContentPane().add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 101, 408, -1));
 
         medicinesTable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         medicinesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -168,390 +155,142 @@ public class SellMedicine extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(medicinesTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 144, -1, 570));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 142, 408, 592));
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Medicine ID");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 68, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 72, -1, -1));
 
         txtUniqueId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtUniqueId, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 94, 328, -1));
+        getContentPane().add(txtUniqueId, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 98, 290, -1));
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Name");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 132, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 130, -1, -1));
 
         txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 158, 328, -1));
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 152, 290, -1));
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Company Name");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 202, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 190, -1, -1));
 
         txtCompanyName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtCompanyName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCompanyNameActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtCompanyName, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, 328, -1));
+        getContentPane().add(txtCompanyName, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 216, 290, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Price Per Unit");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 68, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 72, -1, -1));
 
         txtPricePerUnit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtPricePerUnit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPricePerUnitActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtPricePerUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 94, 330, -1));
+        getContentPane().add(txtPricePerUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 98, 301, -1));
 
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("No Of Units");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 138, -1, -1));
+        jLabel7.setText("No. Of Units");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 130, -1, -1));
 
         txtNoOfUnits.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtNoOfUnits.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNoOfUnitsKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtNoOfUnitsKeyReleased(evt);
+        txtNoOfUnits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNoOfUnitsActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNoOfUnits, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 164, 330, -1));
+        getContentPane().add(txtNoOfUnits, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 152, 301, -1));
 
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Total Price");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 208, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 190, -1, -1));
 
         txtTotalPrice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtTotalPrice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalPriceActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 234, 330, -1));
+        getContentPane().add(txtTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(988, 216, 301, -1));
 
-        cartTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Medicine ID", "Name", "Company Name", "Price Per Unit", "Total price"
+                "Medicine ID", "Name", "Company Name", "No. Of Units", "Total Price"
             }
         ));
-        cartTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cartTableMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(cartTable);
+        jScrollPane2.setViewportView(jTable2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 348, 716, 280));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 305, 692, 355));
 
-        btnAddToCart.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnAddToCart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add to cart.png"))); // NOI18N
-        btnAddToCart.setText("Add To Cart");
-        btnAddToCart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddToCartActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAddToCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 292, -1, -1));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add to cart.png"))); // NOI18N
+        jButton2.setText("Add To Cart");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, 260, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel9.setText("TK:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 646, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(597, 688, -1, -1));
 
-        lblFinalTotalPrice.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblFinalTotalPrice.setText("00");
-        getContentPane().add(lblFinalTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 646, -1, -1));
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel10.setText("00");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(652, 688, -1, -1));
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/generate bill & print.png"))); // NOI18N
-        jButton3.setText("Purchase & Print");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1078, 653, -1, -1));
-
-        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adminDashboardBackground.png"))); // NOI18N
-        jLabel11.setText("jLabel11");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jButton3.setText("Purcesh & Print");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1131, 695, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
-    private void txtCompanyNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCompanyNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCompanyNameActionPerformed
-
-    private void txtPricePerUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPricePerUnitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPricePerUnitActionPerformed
-
-    private void txtTotalPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalPriceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalPriceActionPerformed
-
-    private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
-        // TODO add your handling code here:
-        String noOfUnits = txtNoOfUnits.getText();
-        String uniqueId = txtUniqueId.getText();
-
-        if (!noOfUnits.equals("") && !uniqueId.equals("")) {
-            String name = txtName.getText();
-            String companyName = txtCompanyName.getText();
-            String pricePerUnit = txtPricePerUnit.getText();
-            String totalPrice = txtTotalPrice.getText();
-            int checkStock = 0;
-            int checkMedicineAlreadyExistInCart = 0;
-
-            try {
-                Connection con = ConnectionProvider.getCon();
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("SELECT * FROM medicine WHERE uniqueId = '" + uniqueId + "'");
-                while (rs.next()) {
-                    if (rs.getInt("quantity") >= Integer.parseInt(noOfUnits)) {
-                        checkStock = 1;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Medicine is out of stock. Only " + rs.getInt("quantity") + " Left");
-                    }
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-
-            if (checkStock == 1) {
-                DefaultTableModel dtm = (DefaultTableModel) cartTable.getModel();
-                if (cartTable.getRowCount() != 0) {
-                    for (int i = 0; i < cartTable.getRowCount(); i++) {
-                        Object cellValue = dtm.getValueAt(i, 0);
-                        if (cellValue != null && Integer.parseInt(cellValue.toString()) == Integer.parseInt(uniqueId)) {
-                            checkMedicineAlreadyExistInCart = 1;
-                            JOptionPane.showMessageDialog(null, "Medicine already exists in cart");
-                            break; // Exit the loop early if found
-                        }
-                    }
-                }
-                if (checkMedicineAlreadyExistInCart == 0) {
-                    dtm.addRow(new Object[]{uniqueId, name, companyName, pricePerUnit, noOfUnits, totalPrice});
-                    finalTotalPrice = finalTotalPrice + Integer.parseInt(totalPrice);
-                    lblFinalTotalPrice.setText(String.valueOf(finalTotalPrice));
-                    JOptionPane.showMessageDialog(null, "Added Successfully.");
-                }
-                clearMedicineFields();
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "No. of Units field is required.");
-        }
-
-    }//GEN-LAST:event_btnAddToCartActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void medicinesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicinesTableMouseClicked
+    private void txtNoOfUnitsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoOfUnitsActionPerformed
         // TODO add your handling code here:
-        int index = medicinesTable.getSelectedRow();
-        TableModel model = medicinesTable.getModel();
-        String nameOrUniqueId = model.getValueAt(index, 0).toString();
+    }//GEN-LAST:event_txtNoOfUnitsActionPerformed
 
-        String uniqueId[] = nameOrUniqueId.split("-", 0);
-        try {
-            Connection con = ConnectionProvider.getCon();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select *from medicine where uniqueId=" + uniqueId[0] + "");
-            while (rs.next()) {
-                txtUniqueId.setText(uniqueId[0]);
-                txtName.setText(rs.getString("name"));
-                txtCompanyName.setText(rs.getString("companyName"));
-                txtPricePerUnit.setText(rs.getString("price"));
-                txtNoOfUnits.setText("");
-                txtTotalPrice.setText("");
-
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-
-    }//GEN-LAST:event_medicinesTableMouseClicked
-
-    private void txtNoOfUnitsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoOfUnitsKeyPressed
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
-     /*   String noOfUnits = txtNoOfUnits.getText();
-        if (!noOfUnits.equals("")) {
-            String price = txtPricePerUnit.getText();
-            if (!noOfUnits.matches(numberPattern)) {
-                JOptionPane.showMessageDialog(null, "Number of Units field is Invalid");
-            }
-            int totalPrice = Integer.parseInt(noOfUnits) * Integer.parseInt(price);
-            txtTotalPrice.setText(String.valueOf(totalPrice));
-        } else {
-            txtTotalPrice.setText("");
-        }
-*/
-    }//GEN-LAST:event_txtNoOfUnitsKeyPressed
-
-    private void cartTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartTableMouseClicked
-        // TODO add your handling code here:
-        int index = cartTable.getSelectedRow();
-        int a = JOptionPane.showConfirmDialog(null, "Do you want to remove this Medicine", "Select", JOptionPane.YES_NO_OPTION);
-        if (a == 0) {
-            TableModel model = cartTable.getModel();
-            String total = model.getValueAt(index, 4).toString();
-            finalTotalPrice = finalTotalPrice - Integer.parseInt(total);
-            lblFinalTotalPrice.setText(String.valueOf(finalTotalPrice));
-            ((DefaultTableModel) cartTable.getModel()).removeRow(index);
-        }
-
-    }//GEN-LAST:event_cartTableMouseClicked
+    }//GEN-LAST:event_txtNameActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
         medicineName("");
         txtUniqueId.setEditable(false);
         txtName.setEditable(false);
-         txtCompanyName.setEditable(false);
-          txtPricePerUnit.setEditable(false);
-           txtTotalPrice.setEditable(false);
+        txtCompanyName.setEditable(false);
+        txtPricePerUnit.setEditable(false);
+        txtTotalPrice.setEditable(false);
     }//GEN-LAST:event_formComponentShown
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
         // TODO add your handling code here:
         String search = txtSearch.getText();
         medicineName(search);
-        
     }//GEN-LAST:event_txtSearchKeyReleased
 
-    private void txtNoOfUnitsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoOfUnitsKeyReleased
+    private void medicinesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_medicinesTableMouseClicked
         // TODO add your handling code here:
-         String noOfUnits = txtNoOfUnits.getText();
-        if (!noOfUnits.equals("")) {
-            String price = txtPricePerUnit.getText();
-            if (!noOfUnits.matches(numberPattern)) {
-                JOptionPane.showMessageDialog(null, "Number of Units field is Invalid");
-            }
-            int totalPrice = Integer.parseInt(noOfUnits) * Integer.parseInt(price);
-            txtTotalPrice.setText(String.valueOf(totalPrice));
-        } else {
-            txtTotalPrice.setText("");
-        }
-        
-    }//GEN-LAST:event_txtNoOfUnitsKeyReleased
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        if(finalTotalPrice !=0){
-            billId = getUniqueId("Bill-");
+        int index = medicinesTable.getSelectedRow();
+        TableModel model = medicinesTable.getModel();
+        String nameOrUniqueId = model.getValueAt(index, 0).toString();
+        String uniqueId[] = nameOrUniqueId.split("-",0);
+        try{
+            Connection con = ConnectionProvider.getCon();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select *from medicine where uniqueId="+uniqueId[0]+"");
             
-            DefaultTableModel dtm = (DefaultTableModel) cartTable.getModel();
-            if(cartTable.getRowCount() != 0){
-                for(int i = 0;i<cartTable.getRowCount();i++){
-                    try{
-                        Connection con = ConnectionProvider.getCon();
-                        Statement st = con.createStatement();
-                        st.executeUpdate("update medicine set quantity=quantity-"+Integer.parseInt(dtm.getValueAt(i, 4).toString()) + " where uniqueId="+Integer.parseInt(dtm.getValueAt(i, 0).toString()));
-                        
-                    }
-                    catch(Exception e){
-                        JOptionPane.showMessageDialog(null, e);
-                    }
-                }
-                
-            }
-            try{
-                SimpleDateFormat myFormat = new SimpleDateFormat("dd-MM-yyyy");
-                Calendar cal = Calendar.getInstance();
-                Connection con = ConnectionProvider.getCon();
-                PreparedStatement ps = con.prepareStatement("insert into bill(billId,bilDate,totalpaid,generateBy)values(?,?,?,?)");
-                ps.setString(1, billId);
-                ps.setString(2, myFormat.format(cal.getTime()));
-                ps.setInt(3, finalTotalPrice);
-                ps.setString(4, username);
-                ps.executeUpdate();
-
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null, e);
-            }
-            com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
-            try{
-                PdfWriter.getInstance(doc, new FileOutputStream(PharmacyUtils.billpath+""+billId+".pdf"));
-                doc.open();
-                Paragraph pharmacyName = new  Paragraph ("                                       Pharmacy Management System\n");
-                doc.add(pharmacyName);
-                Paragraph starline = new Paragraph ("*************************************************************************");
-                doc.add(starline);
-                Paragraph details = new Paragraph("\tBill ID: "+billId+"\nDate: "+new Date()+"\nTotal Paid: "+finalTotalPrice);
-                doc.add(details);
-                doc.add(starline);
-                PdfPTable tb1 = new PdfPTable(6);
-                tb1.addCell("Medicine ID");
-                tb1.addCell("Name");
-                tb1.addCell("Company Name");
-                tb1.addCell("Price Per Unit");
-                tb1.addCell("No of units");
-                tb1.addCell("Sub Total Price");
-                for( int i =0; i<cartTable.getRowCount();i++){
-                    String a = cartTable.getValueAt(i, 0).toString();
-                    String b = cartTable.getValueAt(i, 1).toString();
-                    String c = cartTable.getValueAt(i, 2).toString();
-                    String d = cartTable.getValueAt(i, 3).toString();
-                    String e = cartTable.getValueAt(i, 4).toString();
-                    String f = cartTable.getValueAt(i, 5).toString();
-                    tb1.addCell(a);
-                    tb1.addCell(b);
-                    tb1.addCell(c);
-                    tb1.addCell(d);
-                    tb1.addCell(e);
-                    tb1.addCell(f);
-                    
-                }
-                doc.add(tb1);
-                doc.add(starline);
-                Paragraph thanksMsg = new Paragraph ("Thank You, Please Visit Again.");
-                doc.add(thanksMsg);
-                
-                OpenPdf.openById(String.valueOf(billId));
-                
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null, e);
-            }
-            doc.close();
-            setVisible(false);
-            new SellMedicine(username).setVisible(true);
         }
-        else {
-            JOptionPane.showMessageDialog(null, "Please add some Medicine to Cart.");
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
         }
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_medicinesTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -589,12 +328,11 @@ public class SellMedicine extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddToCart;
-    private javax.swing.JTable cartTable;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -606,7 +344,7 @@ public class SellMedicine extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblFinalTotalPrice;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTable medicinesTable;
     private javax.swing.JTextField txtCompanyName;
     private javax.swing.JTextField txtName;
