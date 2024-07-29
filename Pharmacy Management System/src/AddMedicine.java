@@ -7,26 +7,22 @@ import java.sql.*;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author fhnab
  */
 public class AddMedicine extends javax.swing.JFrame {
+
     public String numberpattern = "^[0-9]*$";
-    
-
-
 
     /**
      * Creates new form AddMedicine
      */
     public AddMedicine() {
         initComponents();
-        
+
         setLocationRelativeTo(null);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -145,8 +141,8 @@ public class AddMedicine extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-       // String uniqueId = txtUniqueId.getText();
-       /*  String typeMedicine =(String)comboType.getSelectedItem();
+        // String uniqueId = txtUniqueId.getText();
+        /*  String typeMedicine =(String)comboType.getSelectedItem();
          String name = txtName.getText();
          String comboCom = (String)comboCompany.getSelectedItem();
          String quantity = txtQuantity.getText();
@@ -192,60 +188,60 @@ public class AddMedicine extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
       */
-                                           
-    // TODO add your handling code here:
-    String typeMedicine = (String) comboType.getSelectedItem();
-    String name = txtName.getText();
-    String comboCom = (String) comboCompany.getSelectedItem();
-    String quantity = txtQuantity.getText();
-    String price = txtPricePerUnit.getText();
 
-    if(typeMedicine.equals("")) {
-        JOptionPane.showMessageDialog(null, "Type of Medicine field is required.");
-    } else if(name.equals("")) {
-        JOptionPane.showMessageDialog(null, "Name field is required.");
-    } else if(comboCom.equals("")) {
-        JOptionPane.showMessageDialog(null, "Company Name field is required.");
-    } else if(quantity.equals("")) {
-        JOptionPane.showMessageDialog(null, "Quantity field is required.");
-    } else if(!quantity.matches(numberpattern)) {
-        JOptionPane.showMessageDialog(null, "Quantity field is invalid.");
-    } else if(price.equals("")) {
-        JOptionPane.showMessageDialog(null, "Price per Unit field is required.");
-    } else if(!price.matches(numberpattern)) {
-        JOptionPane.showMessageDialog(null, "Price Per Unit field is invalid.");
-    } else {
-        try {
-            Connection con = ConnectionProvider.getCon();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO medicine (type_of_medicines, name, companyName, quantity, price) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, typeMedicine);
-            ps.setString(2, name);
-            ps.setString(3, comboCom);
-            ps.setString(4, quantity);
-            ps.setString(5, price);
-            ps.executeUpdate();
-            
-            // Retrieve the generated key (medicine_pk)
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                int medicinePk = generatedKeys.getInt(1);
-                int uniqueId = medicinePk + 999;
-                
-                // Update the uniqueId for the inserted record
-                PreparedStatement updatePs = con.prepareStatement("UPDATE medicine SET uniqueId = ? WHERE medicine_pk = ?");
-                updatePs.setInt(1, uniqueId);
-                updatePs.setInt(2, medicinePk);
-                updatePs.executeUpdate();
+        // TODO add your handling code here:
+        String typeMedicine = (String) comboType.getSelectedItem();
+        String name = txtName.getText();
+        String comboCom = (String) comboCompany.getSelectedItem();
+        String quantity = txtQuantity.getText();
+        String price = txtPricePerUnit.getText();
+
+        if (typeMedicine.equals("")) {
+            JOptionPane.showMessageDialog(null, "Type of Medicine field is required.");
+        } else if (name.equals("")) {
+            JOptionPane.showMessageDialog(null, "Name field is required.");
+        } else if (comboCom.equals("")) {
+            JOptionPane.showMessageDialog(null, "Company Name field is required.");
+        } else if (quantity.equals("")) {
+            JOptionPane.showMessageDialog(null, "Quantity field is required.");
+        } else if (!quantity.matches(numberpattern)) {
+            JOptionPane.showMessageDialog(null, "Quantity field is invalid.");
+        } else if (price.equals("")) {
+            JOptionPane.showMessageDialog(null, "Price per Unit field is required.");
+        } else if (!price.matches(numberpattern)) {
+            JOptionPane.showMessageDialog(null, "Price Per Unit field is invalid.");
+        } else {
+            try {
+                Connection con = ConnectionProvider.getCon();
+                PreparedStatement ps = con.prepareStatement("INSERT INTO medicine (type_of_medicines, name, companyName, quantity, price) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, typeMedicine);
+                ps.setString(2, name);
+                ps.setString(3, comboCom);
+                ps.setString(4, quantity);
+                ps.setString(5, price);
+                ps.executeUpdate();
+
+                // Retrieve the generated key (medicine_pk)
+                ResultSet generatedKeys = ps.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int medicinePk = generatedKeys.getInt(1);
+                    int uniqueId = medicinePk + 999;
+
+                    // Update the uniqueId for the inserted record
+                    PreparedStatement updatePs = con.prepareStatement("UPDATE medicine SET uniqueId = ? WHERE medicine_pk = ?");
+                    updatePs.setInt(1, uniqueId);
+                    updatePs.setInt(2, medicinePk);
+                    updatePs.executeUpdate();
+                }
+
+                JOptionPane.showMessageDialog(null, "Medicine Added Successfully.");
+                setVisible(false);
+                new AddMedicine().setVisible(true);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
             }
-            
-            JOptionPane.showMessageDialog(null, "Medicine Added Successfully.");
-            setVisible(false);
-            new AddMedicine().setVisible(true);
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e);
         }
     }
-}
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:

@@ -5,13 +5,13 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author fhnab
  */
 public class Pharmacist extends javax.swing.JFrame {
-    private String username ="";
+
+    private String username = "";
 
     /**
      * Creates new form Pharmacist
@@ -19,6 +19,7 @@ public class Pharmacist extends javax.swing.JFrame {
     public Pharmacist() {
         initComponents();
     }
+
     public Pharmacist(String tempUsername) {
         initComponents();
         username = tempUsername;
@@ -150,6 +151,7 @@ public class Pharmacist extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        new ViewBill().setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -169,21 +171,21 @@ public class Pharmacist extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        int a = JOptionPane.showConfirmDialog(null,"Do you want to Logout","select",JOptionPane.YES_NO_OPTION);
-        
-        if(a==0){
+        int a = JOptionPane.showConfirmDialog(null, "Do you want to Logout", "select", JOptionPane.YES_NO_OPTION);
+
+        if (a == 0) {
             setVisible(false);
             new Login().setVisible(true);
         }
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        int a = JOptionPane.showConfirmDialog(null,"Do you want to  Close Application","select",JOptionPane.YES_NO_OPTION);
-        
-        if(a==0){
-           System.exit(0);
+        int a = JOptionPane.showConfirmDialog(null, "Do you want to  Close Application", "select", JOptionPane.YES_NO_OPTION);
+
+        if (a == 0) {
+            System.exit(0);
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 

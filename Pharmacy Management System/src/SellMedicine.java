@@ -325,7 +325,7 @@ public class SellMedicine extends javax.swing.JFrame {
             if (!noOfUnits.matches(numberPattern)) {
                 JOptionPane.showMessageDialog(null, "Number of Units field is Invalid");
             }
-            int totalPrice = Integer.parseInt(noOfUnits)* Integer.parseInt(price);
+            int totalPrice = Integer.parseInt(noOfUnits) * Integer.parseInt(price);
             txtTotalPrice.setText(String.valueOf(totalPrice));
         } else {
             txtTotalPrice.setText("");
@@ -343,37 +343,36 @@ public class SellMedicine extends javax.swing.JFrame {
             String pricePerUnit = txtPricePerUnit.getText();
             String totalPrice = txtTotalPrice.getText();
             int checkStock = 0;
-            int checkMedicineAlreadyExistInCart = 0 ;
-            
-            try{
+            int checkMedicineAlreadyExistInCart = 0;
+
+            try {
                 Connection con = ConnectionProvider.getCon();
                 Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("select *from medicine where uniqueId="+uniqueId+"");
-                while(rs.next()){
-                    if(rs.getInt("quantity") >= Integer.parseInt(noOfUnits)){
+                ResultSet rs = st.executeQuery("select *from medicine where uniqueId=" + uniqueId + "");
+                while (rs.next()) {
+                    if (rs.getInt("quantity") >= Integer.parseInt(noOfUnits)) {
                         checkStock = 1;
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Medicine is out of stock.Only "+rs.getInt("quantity")+" Left");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Medicine is out of stock.Only " + rs.getInt("quantity") + " Left");
                     }
                 }
-                
-            }
-            catch (Exception e){
+
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
-            
-            if(checkStock == 1){
+
+            if (checkStock == 1) {
                 DefaultTableModel dtm = (DefaultTableModel) cartTable.getModel();
-                if(cartTable.getRowCount() != 0){
-                    for(int i=0 ; i<cartTable.getRowCount();i++){
-                        if(Integer.parseInt(dtm.getValueAt(i, 0).toString()) == Integer.parseInt(uniqueId)){
+                if (cartTable.getRowCount() != 0) {
+                    for (int i = 0; i < cartTable.getRowCount(); i++) {
+                        if (Integer.parseInt(dtm.getValueAt(i, 0).toString()) == Integer.parseInt(uniqueId)) {
                             checkMedicineAlreadyExistInCart = 1;
                             JOptionPane.showMessageDialog(null, "Medicine already exist in cart.");
                         }
                     }
                 }
-                if(checkMedicineAlreadyExistInCart == 0){
-                    dtm.addRow(new Object[]{uniqueId,name,companyName,pricePerUnit,noOfUnits,totalPrice});
+                if (checkMedicineAlreadyExistInCart == 0) {
+                    dtm.addRow(new Object[]{uniqueId, name, companyName, pricePerUnit, noOfUnits, totalPrice});
                     finalTotalPrice = finalTotalPrice + Integer.parseInt(totalPrice);
                     lblFinalTotalPrice.setText(String.valueOf(finalTotalPrice));
                     JOptionPane.showMessageDialog(null, "Added Successfully.");
@@ -381,8 +380,7 @@ public class SellMedicine extends javax.swing.JFrame {
                 clearMedicineFields();
             }
 
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "No. Of Units fields is required");
         }
     }//GEN-LAST:event_btnAddToCartActionPerformed
@@ -390,9 +388,9 @@ public class SellMedicine extends javax.swing.JFrame {
     private void cartTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartTableMouseClicked
         // TODO add your handling code here:
         int index = cartTable.getSelectedRow();
-        int a = JOptionPane.showConfirmDialog(null, "Do you Want Remove this Medicine","Select",JOptionPane.YES_NO_OPTION);
-        if(a==0){
-            TableModel model =  cartTable.getModel();
+        int a = JOptionPane.showConfirmDialog(null, "Do you Want Remove this Medicine", "Select", JOptionPane.YES_NO_OPTION);
+        if (a == 0) {
+            TableModel model = cartTable.getModel();
             String total = model.getValueAt(index, 5).toString();
             finalTotalPrice = finalTotalPrice - Integer.parseInt(total);
             lblFinalTotalPrice.setText(String.valueOf(finalTotalPrice));
@@ -402,49 +400,46 @@ public class SellMedicine extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if(finalTotalPrice != 0){
-            billId = getUniqueId ("Bill-");
-            
+        if (finalTotalPrice != 0) {
+            billId = getUniqueId("Bill-");
+
             DefaultTableModel dtm = (DefaultTableModel) cartTable.getModel();
-            if(cartTable.getRowCount() != 0){
-                for(int i= 0;i<cartTable.getRowCount();i++){
-                    try{
+            if (cartTable.getRowCount() != 0) {
+                for (int i = 0; i < cartTable.getRowCount(); i++) {
+                    try {
                         Connection con = ConnectionProvider.getCon();
                         Statement st = con.createStatement();
-                        st.executeUpdate("update medicine set quantity=quantity-"+Integer.parseInt(dtm.getValueAt(i, 4).toString())+" where uniqueId="+Integer.parseInt(dtm.getValueAt(i, 0).toString()));
-                    }
-                    catch(Exception e){
+                        st.executeUpdate("update medicine set quantity=quantity-" + Integer.parseInt(dtm.getValueAt(i, 4).toString()) + " where uniqueId=" + Integer.parseInt(dtm.getValueAt(i, 0).toString()));
+                    } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e);
                     }
                 }
             }
-            
-            
-            try{
+
+            try {
                 SimpleDateFormat myFormat = new SimpleDateFormat("dd-MM-yyyy");
                 Calendar cal = Calendar.getInstance();
                 Connection con = ConnectionProvider.getCon();
                 PreparedStatement ps = con.prepareStatement("insert into bill( bilId,bilDate,totalPaid,generatedBy) Values(?,?,?,?)");
                 ps.setString(1, billId);
-                ps.setString(2,myFormat.format(cal.getTime()));
+                ps.setString(2, myFormat.format(cal.getTime()));
                 ps.setInt(3, finalTotalPrice);
                 ps.setString(4, username);
                 ps.executeUpdate();
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
-            
+
             //Create Bill
             com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
-            try{
-                PdfWriter.getInstance(doc, new FileOutputStream(PharmacyUtils.billpath+""+billId+".pdf"));
+            try {
+                PdfWriter.getInstance(doc, new FileOutputStream(PharmacyUtils.billpath + "" + billId + ".pdf"));
                 doc.open();
-                Paragraph pharmacyName = new Paragraph ("                                     Pharmacy Management System\n");
+                Paragraph pharmacyName = new Paragraph("                                     Pharmacy Management System\n");
                 doc.add(pharmacyName);
-                Paragraph starLine = new Paragraph ("---------------------------------------------------------------------------------");
+                Paragraph starLine = new Paragraph("---------------------------------------------------------------------------------");
                 doc.add(starLine);
-                Paragraph details = new Paragraph("\tBill ID: "+billId+"\nDate: "+new Date()+"\nTotal Paid: "+finalTotalPrice);
+                Paragraph details = new Paragraph("\tBill ID: " + billId + "\nDate: " + new Date() + "\nTotal Paid: " + finalTotalPrice);
                 doc.add(details);
                 doc.add(starLine);
                 PdfPTable tb1 = new PdfPTable(6);
@@ -454,15 +449,15 @@ public class SellMedicine extends javax.swing.JFrame {
                 tb1.addCell("Price Per Unit");
                 tb1.addCell("No Of Units");
                 tb1.addCell("Sub Total Price");
-                
-                for(int i = 0; i<cartTable.getRowCount(); i++){
+
+                for (int i = 0; i < cartTable.getRowCount(); i++) {
                     String a = cartTable.getValueAt(i, 0).toString();
                     String b = cartTable.getValueAt(i, 1).toString();
                     String c = cartTable.getValueAt(i, 2).toString();
                     String d = cartTable.getValueAt(i, 3).toString();
                     String e = cartTable.getValueAt(i, 4).toString();
                     String f = cartTable.getValueAt(i, 5).toString();
-                    
+
                     tb1.addCell(a);
                     tb1.addCell(b);
                     tb1.addCell(c);
@@ -472,20 +467,18 @@ public class SellMedicine extends javax.swing.JFrame {
                 }
                 doc.add(tb1);
                 doc.add(starLine);
-                Paragraph thankMsg = new  Paragraph("Thank you, Please Visit Again");
+                Paragraph thankMsg = new Paragraph("Thank you, Please Visit Again");
                 doc.add(thankMsg);
-                
-                
+
                 OpenPdf.openBy(String.valueOf(billId));
-            }
-            catch(Exception e){
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
             doc.close();
             setVisible(false);
             new SellMedicine(username).setVisible(true);
-        }else{
-        JOptionPane.showMessageDialog(null, "Please add some Medicine to cart.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Please add some Medicine to cart.");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

@@ -4,6 +4,7 @@
  */
 
 import javax.swing.JOptionPane;
+
 public class AdminDashborad extends javax.swing.JFrame {
 
     private String username = "";
@@ -15,9 +16,9 @@ public class AdminDashborad extends javax.swing.JFrame {
         initComponents();
     }
 
-    public AdminDashborad( String tempUsername) {
+    public AdminDashborad(String tempUsername) {
         initComponents();
-        username= tempUsername;
+        username = tempUsername;
         System.out.println(username);
         setLocationRelativeTo(null);
     }
@@ -130,8 +131,8 @@ public class AdminDashborad extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-         int a = JOptionPane.showConfirmDialog(null,"Do you want to close Application","Select",JOptionPane.YES_OPTION);
-        if(a==0){
+        int a = JOptionPane.showConfirmDialog(null, "Do you want to close Application", "Select", JOptionPane.YES_OPTION);
+        if (a == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -139,15 +140,15 @@ public class AdminDashborad extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         new ViewUser(username).setVisible(true);
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        int a = JOptionPane.showConfirmDialog(null,"Do you want to  Logout","Select",JOptionPane.YES_OPTION);
-        if(a==0){
-             setVisible(false);
-             new Login().setVisible(true);
+        int a = JOptionPane.showConfirmDialog(null, "Do you want to  Logout", "Select", JOptionPane.YES_OPTION);
+        if (a == 0) {
+            setVisible(false);
+            new Login().setVisible(true);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
