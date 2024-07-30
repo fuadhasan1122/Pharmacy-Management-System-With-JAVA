@@ -1,9 +1,9 @@
 
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import common.OpenPdf;
-
 import dao.ConnectionProvider;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +13,7 @@ import javax.swing.table.TableModel;
 import java.util.Calendar;
 import java.util.Date;
 import dao.PharmacyUtils;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 

@@ -3,28 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package common;
-import java.io.File;
 import javax.swing.JOptionPane;
 import dao.PharmacyUtils;
-
+import java.io.File;
+import java.io.IOException;
 /**
  *
- * @author fhnab
+ * @author kulde
  */
 public class OpenPdf {
-    public static void openBy(String id){
+    public static void openBy(String Id){
         try{
-            if((new File (PharmacyUtils.billpath+id+".pdf")).exists()){
-                Process p = Runtime
+            if(new File(PharmacyUtils.billpath+Id+".pdf").exists()){
+                Process P=Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler"+PharmacyUtils.billpath+""+id+".pdf");
+                        .exec("rundll32 url.dll,FileProtocolHandler "+PharmacyUtils.billpath+""+Id+".pdf");
+            }else{
+                JOptionPane.showMessageDialog(null,"Bill not found.");
             }
-            else{
-                JOptionPane.showMessageDialog(null, "File is not Exists.");
-            }
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null,e);
         }
     }
+
+    
 }
