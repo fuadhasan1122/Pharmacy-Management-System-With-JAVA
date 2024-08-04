@@ -107,6 +107,7 @@ public class SellMedicine extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         lblFinalTotalPrice = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -260,6 +261,10 @@ public class SellMedicine extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 680, -1, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bg1.jpg"))); // NOI18N
+        jLabel10.setText("jLabel10");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -436,9 +441,9 @@ public class SellMedicine extends javax.swing.JFrame {
             try {
                 PdfWriter.getInstance(doc, new FileOutputStream(PharmacyUtils.billpath + "" + billId + ".pdf"));
                 doc.open();
-                Paragraph pharmacyName = new Paragraph("                                     Pharmacy Management System\n");
+                Paragraph pharmacyName = new Paragraph("                                               Abu Said Mir Mugdho Medic World\n");
                 doc.add(pharmacyName);
-                Paragraph starLine = new Paragraph("---------------------------------------------------------------------------------");
+                Paragraph starLine = new Paragraph("--------------------------------------------------------------------------------------------------------------------------");
                 doc.add(starLine);
                 Paragraph details = new Paragraph("\tBill ID: " + billId + "\nDate: " + new Date() + "\nTotal Paid: " + finalTotalPrice);
                 doc.add(details);
@@ -524,6 +529,7 @@ public class SellMedicine extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

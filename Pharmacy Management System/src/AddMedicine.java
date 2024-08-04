@@ -101,10 +101,10 @@ public class AddMedicine extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Price Per Unit");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 92, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, -1));
 
         txtPricePerUnit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtPricePerUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, 262, -1));
+        getContentPane().add(txtPricePerUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 262, -1));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
@@ -114,7 +114,7 @@ public class AddMedicine extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 188, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, -1, -1));
 
         comboCompany.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         comboCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Square Pharmaceuticals Ltd.", "Incepta Pharmaceutical Ltd.", "Beximco Pharmaceuticals Ltd.", "Opsonin Pharma Ltd.", "Renata Ltd.", "Healthcare Pharmaceuticals Ltd.", "ACI Pharmaceuticals Ltd.", "Eskayef Pharmaceuticals Ltd.", "ACME Laboratories Ltd.", "Aristopharma Ltd." }));
