@@ -38,7 +38,6 @@ public class ViewMedicine extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -51,7 +50,7 @@ public class ViewMedicine extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("View Medicine");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 16, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 60, 850, 20));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-reply-arrow-30.png"))); // NOI18N
@@ -60,7 +59,7 @@ public class ViewMedicine extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, -1, -1));
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -68,7 +67,7 @@ public class ViewMedicine extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Medicine ID", "Name", "Company Name", "Quantity", "Price"
+                "ID", "Medicine ID", "Name", "Company Name", "Sub_Type", "Quantity", "Price"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -78,14 +77,11 @@ public class ViewMedicine extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 778, 396));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 1190, 396));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Click on row to delete Medicine");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, -1, -1));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/all_pages_background.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -101,9 +97,9 @@ public class ViewMedicine extends javax.swing.JFrame {
         try{
             Connection con = ConnectionProvider.getCon();
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select *from medicine");
+            ResultSet rs = st.executeQuery("select *from osod");
             while(rs.next()){
-                model.addRow(new Object[]{rs.getString("medicine_pk"),rs.getString("uniqueId"),rs.getString("name"),rs.getString("companyName"),rs.getString("quantity"),rs.getString("price")});
+                model.addRow(new Object[]{rs.getString("medicine_pk"),rs.getString("uniqueId"),rs.getString("name"),rs.getString("companyName"),rs.getString("sub_type"),rs.getString("quantity"),rs.getString("price")});
             }
         }
         catch(Exception e){
@@ -120,7 +116,7 @@ public class ViewMedicine extends javax.swing.JFrame {
         if(a==0){
             try{
                 Connection con = ConnectionProvider.getCon();
-                PreparedStatement ps = con.prepareStatement("delete from medicine where medicine_pk=?");
+                PreparedStatement ps = con.prepareStatement("delete from osod where medicine_pk=?");
                 ps.setString(1, id);
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Medicine Deleted Successfully.");
@@ -172,7 +168,6 @@ public class ViewMedicine extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;

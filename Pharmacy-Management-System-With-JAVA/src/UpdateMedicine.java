@@ -34,6 +34,7 @@ public class UpdateMedicine extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
@@ -51,7 +52,10 @@ public class UpdateMedicine extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtPricePerUnit = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+
+        jLabel8.setBackground(new java.awt.Color(153, 153, 255));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/all_pages_background.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -146,8 +150,8 @@ public class UpdateMedicine extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(526, 241, -1, -1));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/all_pages_background.png"))); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -157,6 +161,7 @@ public class UpdateMedicine extends javax.swing.JFrame {
         String uniqueId = txtMedicineId.getText();
         String name = txtName.getText();
         String companyName = txtCompanyName.getText();
+
         String quantity =  txtQuantity.getText();
         String price = txtPricePerUnit.getText();
         String addQuantity = txtAddQuantity.getText();
@@ -187,7 +192,7 @@ public class UpdateMedicine extends javax.swing.JFrame {
             try{
                 Connection con = ConnectionProvider.getCon();
          
-                PreparedStatement ps = con.prepareStatement("update medicine set name=?,companyName=?,quantity=?,price=? where uniqueId=?");
+                PreparedStatement ps = con.prepareStatement("update osod set name=?,companyName=?,quantity=?,price=? where uniqueId=?");
                 ps.setString(1, name);
                 ps.setString(2, companyName);
                 ps.setInt(3, totalQuantity);
@@ -236,7 +241,7 @@ public class UpdateMedicine extends javax.swing.JFrame {
             try{
               Connection con = ConnectionProvider.getCon();
               Statement st = con.createStatement();
-              ResultSet rs = st.executeQuery("select *from medicine where uniqueId="+uniqueId+"");
+              ResultSet rs = st.executeQuery("select *from osod where uniqueId="+uniqueId+"");
               while(rs.next()){
                   txtMedicineId.setEditable(false);
                   txtName.setText(rs.getString("name"));
@@ -303,6 +308,7 @@ public class UpdateMedicine extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtAddQuantity;
     private javax.swing.JTextField txtCompanyName;

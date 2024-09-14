@@ -49,7 +49,7 @@ public class ViewUser extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -62,7 +62,7 @@ public class ViewUser extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("View User");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(347, 6, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-reply-arrow-30.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,8 +70,8 @@ public class ViewUser extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 66, 924, 10));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, -1, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 66, 1210, 10));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,35 +88,44 @@ public class ViewUser extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 850, 350));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 1190, 360));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Click on row  to Delete User");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 430, -1, 14));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, 14));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/all_pages_background.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 470));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        try{
-            Connection con = ConnectionProvider.getCon();
-            Statement st = con.createStatement();
-            ResultSet rs =  st.executeQuery("Select *from appuser");
-            while(rs.next()){
-                model.addRow(new Object[]{rs.getString("appuser_pk"),rs.getString("name"),rs.getString("userRole"),rs.getString("dob"),rs.getString("mobileNumber"),rs.getString("email"),rs.getString("username"),rs.getString("password"),rs.getString("address")});
-                
-            }
+          DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    try {
+        Connection con = ConnectionProvider.getCon();
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery("SELECT * FROM appuser");
+        while (rs.next()) {
+            String id = rs.getString("appuser_pk");
+            String name = rs.getString("name");
+            String role = rs.getString("userRole");
+            String dob = rs.getString("dob");
+            String mobileNumber = rs.getString("mobileNumber");
+            String email = rs.getString("email");
+            String username = rs.getString("username");
+            String password = rs.getString("password");
+            String address = rs.getString("address");
+
+            // Mask the password
+            String maskedPassword =   "******";
+
+            model.addRow(new Object[]{id, name, role, dob, mobileNumber, email, username, maskedPassword, address});
         }
-        
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+    }
     }//GEN-LAST:event_formComponentShown
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -192,7 +201,7 @@ public class ViewUser extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;

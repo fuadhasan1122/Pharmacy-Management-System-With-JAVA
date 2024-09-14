@@ -15,7 +15,7 @@ import java.sql.*;
 public class Profile extends javax.swing.JFrame {
     public String emailPattern ="^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
     public String mobileNumberPattern = "^[0-9]*$";
-    private String username = "";
+    private String Username = "";
 
     /**
      * Creates new form Profile
@@ -26,7 +26,7 @@ public class Profile extends javax.swing.JFrame {
     
     public Profile(String tempUsername) {
         initComponents();
-        username = tempUsername;
+        Username = tempUsername;
           setLocationRelativeTo(null); 
     }
 
@@ -181,12 +181,12 @@ public class Profile extends javax.swing.JFrame {
                 ps.setString(3, email);
              
                 ps.setString(4, address);
-                ps.setString(5, username);
+                ps.setString(5, Username);
                 
                ps.executeUpdate();
                JOptionPane.showMessageDialog(null, "Profile Successfully Updated.");
                setVisible(false);
-               new Profile(username).setVisible(true);
+               new Profile(Username).setVisible(true);
                
             }
             catch(Exception e){
@@ -204,13 +204,13 @@ public class Profile extends javax.swing.JFrame {
         try{
             Connection con = ConnectionProvider.getCon();
              Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from appuser where username='"+username+"'");
+            ResultSet rs = st.executeQuery("select * from appuser where username='"+Username+"'");
             while(rs.next()){
                  txtName.setText(rs.getString("name"));
                  txtMobileNumber.setText(rs.getString("mobileNumber"));
                  txtEmail.setText(rs.getString("email"));
                  txtAddress.setText(rs.getString("address"));
-                 lblUsername.setText(username);
+                 lblUsername.setText(Username);
             }
         }
         catch(Exception e){

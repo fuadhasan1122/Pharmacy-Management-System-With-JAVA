@@ -47,6 +47,10 @@ public class AddMedicine extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         comboCompany = new javax.swing.JComboBox<>();
         txtName = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        comboSubType = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/all_pages_background.png"))); // NOI18N
 
@@ -64,7 +68,7 @@ public class AddMedicine extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, -1, -1));
 
         comboType.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Liquid", "Tablet", "Capsules", "Topical medicines", "Suppositories", "Drops", "Inhalers", "Injections" }));
@@ -73,23 +77,23 @@ public class AddMedicine extends javax.swing.JFrame {
                 comboTypeActionPerformed(evt);
             }
         });
-        getContentPane().add(comboType, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 198, 260, -1));
+        getContentPane().add(comboType, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 370, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Type of medicines");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 166, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Name");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 248, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Company Name");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 324, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Quantity");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 410, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, -1, -1));
 
         txtQuantity.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtQuantity.addActionListener(new java.awt.event.ActionListener() {
@@ -97,14 +101,14 @@ public class AddMedicine extends javax.swing.JFrame {
                 txtQuantityActionPerformed(evt);
             }
         });
-        getContentPane().add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 436, 260, -1));
+        getContentPane().add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 390, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Price Per Unit");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, -1));
 
         txtPricePerUnit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtPricePerUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 262, -1));
+        getContentPane().add(txtPricePerUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 130, 262, -1));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
@@ -114,7 +118,7 @@ public class AddMedicine extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, -1));
 
         comboCompany.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         comboCompany.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Square Pharmaceuticals Ltd.", "Incepta Pharmaceutical Ltd.", "Beximco Pharmaceuticals Ltd.", "Opsonin Pharma Ltd.", "Renata Ltd.", "Healthcare Pharmaceuticals Ltd.", "ACI Pharmaceuticals Ltd.", "Eskayef Pharmaceuticals Ltd.", "ACME Laboratories Ltd.", "Aristopharma Ltd." }));
@@ -123,10 +127,27 @@ public class AddMedicine extends javax.swing.JFrame {
                 comboCompanyActionPerformed(evt);
             }
         });
-        getContentPane().add(comboCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 260, -1));
+        getContentPane().add(comboCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 380, -1));
 
         txtName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 260, -1));
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 380, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 20, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Sub_Type");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+
+        comboSubType.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        comboSubType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Antibiotics: Fight bacterial infections", "Antivirals: Treat viral infections", "Antifungals: Treat fungal infections", "Antihistamines: Treat allergies", "Antihypertensives: Lower blood pressure", "Antidiabetics: Manage diabetes", "Antidepressants: Treat depression", "Antipsychotics: Treat psychotic disorders", "Vaccines: Prevent diseases", " ", " " }));
+        comboSubType.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+                comboSubTypeAncestorResized(evt);
+            }
+        });
+        getContentPane().add(comboSubType, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 370, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 850, 10));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -191,6 +212,7 @@ public class AddMedicine extends javax.swing.JFrame {
 
         // TODO add your handling code here:
         String typeMedicine = (String) comboType.getSelectedItem();
+        String subType = (String) comboSubType.getSelectedItem();
         String name = txtName.getText();
         String comboCom = (String) comboCompany.getSelectedItem();
         String quantity = txtQuantity.getText();
@@ -198,7 +220,10 @@ public class AddMedicine extends javax.swing.JFrame {
 
         if (typeMedicine.equals("")) {
             JOptionPane.showMessageDialog(null, "Type of Medicine field is required.");
-        } else if (name.equals("")) {
+        }
+        else if (subType.equals("")) {
+            JOptionPane.showMessageDialog(null, "Name field is required.");
+        }else if (name.equals("")) {
             JOptionPane.showMessageDialog(null, "Name field is required.");
         } else if (comboCom.equals("")) {
             JOptionPane.showMessageDialog(null, "Company Name field is required.");
@@ -213,12 +238,13 @@ public class AddMedicine extends javax.swing.JFrame {
         } else {
             try {
                 Connection con = ConnectionProvider.getCon();
-                PreparedStatement ps = con.prepareStatement("INSERT INTO medicine (type_of_medicines, name, companyName, quantity, price) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps = con.prepareStatement("INSERT INTO osod (type_of_medicines,sub_type, name, companyName, quantity, price) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, typeMedicine);
-                ps.setString(2, name);
-                ps.setString(3, comboCom);
-                ps.setString(4, quantity);
-                ps.setString(5, price);
+                ps.setString(2, subType);
+                ps.setString(3, name);
+                ps.setString(4, comboCom);
+                ps.setString(5, quantity);
+                ps.setString(6, price);
                 ps.executeUpdate();
 
                 // Retrieve the generated key (medicine_pk)
@@ -228,7 +254,7 @@ public class AddMedicine extends javax.swing.JFrame {
                     int uniqueId = medicinePk + 999;
 
                     // Update the uniqueId for the inserted record
-                    PreparedStatement updatePs = con.prepareStatement("UPDATE medicine SET uniqueId = ? WHERE medicine_pk = ?");
+                    PreparedStatement updatePs = con.prepareStatement("UPDATE osod SET uniqueId = ? WHERE medicine_pk = ?");
                     updatePs.setInt(1, uniqueId);
                     updatePs.setInt(2, medicinePk);
                     updatePs.executeUpdate();
@@ -251,6 +277,10 @@ public class AddMedicine extends javax.swing.JFrame {
     private void comboCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCompanyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCompanyActionPerformed
+
+    private void comboSubTypeAncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_comboSubTypeAncestorResized
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboSubTypeAncestorResized
 
     /**
      * @param args the command line arguments
@@ -289,16 +319,20 @@ public class AddMedicine extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboCompany;
+    private javax.swing.JComboBox<String> comboSubType;
     private javax.swing.JComboBox<String> comboType;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPricePerUnit;
     private javax.swing.JTextField txtQuantity;

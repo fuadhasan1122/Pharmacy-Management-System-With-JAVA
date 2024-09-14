@@ -59,6 +59,7 @@ public class AddUser extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         iconLabel = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -170,8 +171,6 @@ public class AddUser extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 430, -1, -1));
-
-        iconLabel.setText("jLabel10");
         getContentPane().add(iconLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-reply-arrow-30.png"))); // NOI18N
@@ -180,7 +179,10 @@ public class AddUser extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 0, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(836, 0, 60, -1));
+
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -217,7 +219,7 @@ public class AddUser extends javax.swing.JFrame {
         try{
             Connection con = ConnectionProvider.getCon();
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM appuser WHERE username='"+username+"'");
+            ResultSet rs = st.executeQuery("SELECT * FROM appuser WHERE username='"+ username +"'");
             while(rs.next()){
                       checkUsername=1;
                       iconLabel.setIcon(new ImageIcon("src\\images\\no.png"));
@@ -264,7 +266,7 @@ public class AddUser extends javax.swing.JFrame {
         else if(mobileNumber.equals("")){
             JOptionPane.showMessageDialog(null, "Mobile Number field is required.");
             
-        }else if(!mobileNumber.matches(mobilenumberPattern) || mobileNumber.length() != 10){
+        }else if(!mobileNumber.matches(mobilenumberPattern) || mobileNumber.length() != 11){
             JOptionPane.showMessageDialog(null, "Invalid Mobile Number");
         }else if(email.equals("")){
             JOptionPane.showMessageDialog(null, "Email field is required.");
@@ -283,7 +285,7 @@ public class AddUser extends javax.swing.JFrame {
         else{
             try{
                 Connection con = ConnectionProvider.getCon();
-                PreparedStatement ps = con.prepareStatement("insert into appuser(UserRole,name,dob,mobileNumber,email,username,password,address)values(?,?,?,?,?,?,?,?)");
+                PreparedStatement ps = con.prepareStatement("insert into appuser(userRole,name,dob,mobileNumber,email,username,password,address)values(?,?,?,?,?,?,?,?)");
                 ps.setString(1, userRole);
                 ps.setString(2, name);
                 ps.setString(3, dob);
@@ -361,6 +363,7 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtEmail;
